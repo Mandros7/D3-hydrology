@@ -1,0 +1,89 @@
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.row {
+  width: 500px;
+  height: 50px;
+  margin-left: 15px;
+}
+
+.col0 {
+  width: 8%;
+  display: inline-block;
+  padding: 18px;
+}
+
+
+.col1 {
+  width: 8%;
+  display: inline-block;
+  padding: 18px;
+}
+
+
+.col2 {
+  width: 8%;
+  display: inline-block;
+  padding: 18px;
+}
+
+
+.col3 {
+  width: 8%;
+  display: inline-block;
+  padding: 18px;
+}
+
+
+.col4 {
+  width: 8%;
+  display: inline-block;
+  padding: 20px;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.cell text {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+circle.hidden {
+  fill: #ccc !important;
+}
+
+.extent {
+  fill: #000;
+  fill-opacity: .125;
+  stroke: #fff;
+}
