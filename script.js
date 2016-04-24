@@ -23,7 +23,7 @@ var color = d3.scale.category10();
 var allTraitsCode = ['SK','LI','BE','FR','BG','NL','GR','RS','EE','HR','TR','MK','SI','ES','CZ','CY','IS','CH','AT','DK','FI','SE','IE','ME','LT']
 var desired_traits = ['FR','BE','IE','SK','LT']
 
-d3.csv("2008_2012_monthlyValues_VIS.csv", function(error, datos) {
+d3.csv("2008_2012_monthlyValues_per.csv", function(error, datos) {
 
   if (error) throw error;
   data = datos;
@@ -40,7 +40,7 @@ d3.csv("2008_2012_monthlyValues_VIS.csv", function(error, datos) {
     domainByTrait[trait] = max;
   });
 
-
+  console.log(domainByTrait)
   var svg = d3.select("body").append("svg")
       .attr("width", size * n + padding)
       .attr("height", size * n + padding)
@@ -98,7 +98,7 @@ d3.csv("2008_2012_monthlyValues_VIS.csv", function(error, datos) {
       combos[p.j].property("selectedIndex",allTraitsCode.indexOf(desired_traits[p.j])); 
     }
 
-    y.domain([domainByTrait[p.x] ,0]);
+    y.domain([0,domainByTrait[p.x]]);
     y.range([size - padding, 3*padding]);
       
     cell.selectAll(".bar")
@@ -152,7 +152,7 @@ function cross(a) {
 function updatePlot(p) {
     var cell = d3.select(this);
     var max = d3.max(d3.values(data[p.x]));
-    y.domain([domainByTrait[p.x] ,0]);
+    y.domain([0,domainByTrait[p.x]]);
     y.range([size - padding, 3*padding]);
     
     cell.selectAll("text")
