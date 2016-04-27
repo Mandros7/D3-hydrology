@@ -3,6 +3,17 @@ svg {
   padding: 10px;
 }
 
+.axisMain path,
+.axisMain line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axisMain path {
+  display: none;
+}
+
 .axis,
 .frame {
   shape-rendering: crispEdges;
@@ -67,11 +78,6 @@ svg {
 .cell text {
   font-weight: bold;
   text-transform: capitalize;
-}
-
-.frame {
-  fill: none;
-  stroke: #aaa;
 }
 
 circle {
