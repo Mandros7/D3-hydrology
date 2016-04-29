@@ -16,6 +16,8 @@ var allKeys,data;
 var domainByKey = {}
 
 var allTraitsCode = ['SK','LI','BE','FR','BG','NL','GR','RS','EE','HR','TR','MK','SI','ES','CZ','CY','IS','CH','AT','DK','FI','SE','IE','ME','LT']
+
+
 var desired_traits = ['FR','BE','IE','SK','CH']
 
 var dataMonth;
@@ -23,8 +25,8 @@ var dataMonth;
 // ------------------- //
 
 var marginM = {top: 20, right: 20, bottom: 30, left: 40},
-    widthM = 800 - marginM.left - marginM.right,
-    heightM = 400 - marginM.top - marginM.bottom;
+    widthM = 750 - marginM.left - marginM.right,
+    heightM = 375 - marginM.top - marginM.bottom;
 
 var x0 = d3.scale.ordinal()
     .rangeRoundBands([0, widthM], .1);
@@ -34,8 +36,9 @@ var x1 = d3.scale.ordinal();
 var yMain = d3.scale.linear()
     .range([heightM, 0]);
 
-var color = d3.scale.ordinal()
-    .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
+var color = [];
+
+var availableColors = ['#377eb8','#4daf4a','#ff7f00'];
 
 var xAxis = d3.svg.axis()
     .scale(x0)
@@ -116,6 +119,12 @@ d3.csv("2008_2012_monthlyValues_per.csv", function(error, data) {
               desired_traits[p.j]  = allTraitsCode[combos[p.j].property('selectedIndex')]
               updateKeys(desired_traits)
               updateMatrix(svg)
+              barGraphVars.forEach(function (d) {
+                if (keys.indexOf(d) == -1) {
+                  resetData()
+                }
+              })
+
             }
             else {
               combos[p.j].property("selectedIndex",allTraitsCode.indexOf(desired_traits[p.j]))
@@ -319,20 +328,40 @@ function addCountry(cell,name) {
     var index = barGraphVars.indexOf(name);
     if (index != -1){
       barGraphVars.splice(index, 1);
+      unBindColor(name);
       cell.selectAll(".frame")
         .attr("stroke","#aaa")
         .attr("stroke-width",1)
     }
     else {
-      if (barGraphVars.length < 5) {
+      if (barGraphVars.length < 3) {
+        bindColor(name);
         barGraphVars.push(name)
         cell.selectAll(".frame")
-        .attr("stroke",color(name))
+        .attr("stroke",getColorByName(name))
         .attr("stroke-width",5)
       }
     }
-    console.log(barGraphVars)
     reloadBarChart()
+}
+
+function bindColor(name){
+  var newColor;
+  availableColors.forEach(function (possibleColor) {
+    fil = d3.values(color).filter(function(d) {return d.color==possibleColor})
+    if (fil.length == 0)
+      newColor = possibleColor;
+  });
+  color.push({name: name, color:newColor});
+}
+
+function unBindColor(name){
+  color = color.filter(function (d) {return d.name !== name});
+}
+
+function getColorByName(name) {
+  find = color.filter(function(d) {return d.name == name})
+  return find[0].color
 }
 
 function reloadBarChart() {
@@ -373,7 +402,7 @@ function reloadBarChart() {
       
       state.selectAll("rect")
         .data(function(d) { return d.sflow; })
-        .style("fill", function(d) { return color(d.name); })
+        .style("fill", function(d) { return getColorByName(d.name); })
 
       state.selectAll("rect")
         .data(function(d) { return d.sflow; })
@@ -389,5 +418,54 @@ function reloadBarChart() {
         .exit().remove()
 
 
+
+
+    svgBars.selectAll(".legend")
+        .data(countryNames)
+        .exit().remove()
+
+    var legend = svgBars.selectAll(".legend")
+        .data(countryNames)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) {return "translate(0," + (i * 20) + ")"; });
+
+    legend.append("rect")
+        .attr("x", widthM - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", getColorByName);
+
+    legend.append("text")
+        .attr("x", widthM - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d; });
+
+    var updateLegends = svgBars.selectAll(".legend")
+        .data(countryNames)
+
+    updateLegends.select("rect")
+        .attr("x", widthM - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", getColorByName);
+
+    updateLegends.select("text")
+        .attr("x", widthM - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d; });
 }
 
+function resetData(){
+  barGraphVars = [];
+  color = [];
+  cell = d3.selectAll(".cell");
+  cell.selectAll(".frame")
+        .attr("stroke","#aaa")
+        .attr("stroke-width",1)
+  reloadBarChart()     
+}
