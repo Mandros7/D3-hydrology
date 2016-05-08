@@ -1,6 +1,6 @@
 svg {
   font: 10px sans-serif;
-  padding: 10px;
+  padding: 0px;
 }
 
 .axisMain path,
@@ -19,52 +19,49 @@ svg {
   shape-rendering: crispEdges;
 }
 
-.row {
-  width: 500px;
-  height: 50px;
-  margin-left: 15px;
+
+.rowSel {
+  width: 430px;
+  height: 25px;
+  margin-left: 20px;
 }
 
 .col0 {
-  width: 8%;
+  width: 16%;
   display: inline-block;
-  padding: 18px;
-}
+/*  padding: 30px;
+*/}
 
 
 .col1 {
-  width: 8%;
+  width: 16%;
   display: inline-block;
-  padding: 18px;
+  /*padding: 30px;*/
 }
 
 
 .col2 {
-  width: 8%;
+  width: 16%;
   display: inline-block;
-  padding: 18px;
+/*  padding: 30px;*/
 }
 
 
 .col3 {
-  width: 8%;
+  width: 16%;
   display: inline-block;
-  padding: 18px;
+  /*padding: 30px;*/
 }
 
 
 .col4 {
-  width: 8%;
+  width: 16%;
   display: inline-block;
-  padding: 20px;
+  /*padding: 30px;*/
 }
 
 .bar {
   fill: steelblue;
-}
-
-.bar:hover {
-  fill: brown;
 }
 
 .axis line {

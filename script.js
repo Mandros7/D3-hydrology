@@ -1,8 +1,8 @@
 
 //Size de los elementos de la matriz 
-var width = 480,
-    size = 80,
-    padding = 10;
+var width = 430,
+    size = 72,
+    padding = 9;
     barsize = size*2/40
 
 //Eje Y.
@@ -24,8 +24,8 @@ var dataMonth;
 
 // ------------------- //
 
-var marginM = {top: 20, right: 20, bottom: 30, left: 40},
-    widthM = 750 - marginM.left - marginM.right,
+var marginM = {top: 30, right: 20, bottom: 30, left: 50},
+    widthM = 650 - marginM.left - marginM.right,
     heightM = 375 - marginM.top - marginM.bottom;
 
 var x0 = d3.scale.ordinal()
@@ -56,7 +56,8 @@ var yAxis = d3.svg.axis()
 .
 .
 */
- var svg = d3.select("body").append("svg")
+ var svg = d3.select(".box").append("svg")
+      .attr("padding", 15)
       .attr("width", size * 5 + padding)
       .attr("height", size * 5 + padding)
       .append("g")
@@ -168,7 +169,7 @@ d3.csv("2008_2012_monthlyValues_per.csv", function(error, data) {
 .
 .*/
 
-var svgBars = d3.select("body").append("svg")
+var svgBars = d3.select(".box").append("svg")
     .attr("width", widthM + marginM.left + marginM.right)
     .attr("height", heightM + marginM.top + marginM.bottom)
   .append("g")

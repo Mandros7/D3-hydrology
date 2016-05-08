@@ -1,8 +1,24 @@
-<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 <meta charset="utf-8">
 <link rel="stylesheet" href="./styles.css"/>
+<head>
+</head>
 <body>
-  <div class="row">
+<div class="container">
+  <div class="jumbotron">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="text-center">Datos de hidrología en Europa</h1>
+        <h2 class="text-center"><em>Una visualización del agua que atraviesa el continente.</em></h2>
+<hr>
+<br>
+
+
+
+
+          <div class="rowSel">
     <div class="col4">
     </div>
     <div class="col3">
@@ -22,10 +38,36 @@
 <script src="./script.js"></script>
 
 
-  <div id="option">
+  <div id="option" style="margin-left: 20px;">
     <input name="updateButton" 
            type="button" 
            value="Reset" 
            onclick="resetData()" />
   </div>
+
+
+
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <h3>Instrucciones de uso:</h3>
+          <ul>
+            <li> Usar selectores para escoger los 5 países a comparar en la matriz </li>
+            <li> Seleccionar/Deseleccionar años y países concretos para representar en un diagrama de barras </li>
+            <li> En cualquier momento se puede resetear la aplicación </li>
+            
+          </ul>
+<!--           <blockquote>
+            <p></p>
+            <footer><cite>Indian Prime Minister Manmohan Singh</cite></footer>
+          </blockquote> -->
+        </div>
+      </div>
+    </div> 
+  </div>
+  <footer class="text-center">
+    <hr>
+    <p>Desarrollado por Héctor Rodríguez Campo</p>
+  </footer>  
+</div>  
+
 </body>
+</html>
